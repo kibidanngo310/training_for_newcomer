@@ -43,24 +43,25 @@ def enumerate_possible_pairs(fastafile: str, min_distance: int=4) -> List[Tuple[
     for i in range(0, len(seq)):
         for l in range(i, len(seq)):
             if seq[i] == "A" and seq[l] == "U":
-                if l - i >= 4:
+                if l - i >= min_distance:
                     results.append((i+1, l+1))
                 
             if seq[i] == "U" and seq[l] == "A":
-                if l - i >= 4:
+                if l - i >= min_distance:
                     results.append((i+1, l+1))
 
             if seq[i] == "G" and seq[l] == "C":
-                if l - i >= 4:
+                if l - i >= min_distance:
                     results.append((i+1, l+1))
 
             if seq[i] == "C" and seq[l] == "G":
-                if l - i >= 4:
+                if l - i >= min_distance:
                     results.append((i+1, l+1))
     return results
 
 def enumerate_continuous_pairs(fastafile: str, min_distance: int=4, min_length: int=2) -> List[Tuple[int, int, int]]:
     # 課題 2-3
+
     return []
 
 def create_dotbracket_notation(fastafile: str, min_distance: int=4, min_length: int=2) -> str:
