@@ -83,7 +83,25 @@ def enumerate_continuous_pairs(fastafile: str, min_distance: int=4, min_length: 
 
 def create_dotbracket_notation(fastafile: str, min_distance: int=4, min_length: int=2) -> str:
     # 課題 2-4
-    return ""
+    seq_list = []
+
+    with open(fastafile, 'r') as f:
+        for line in f:
+            if not line.startswith('>'):
+                seq_list.append(line.strip().upper())
+
+    seq = "".join(seq_list)
+    results = list("." * len(seq))
+    item = enumerate_continuous_pairs(fastafile, 2)
+
+    for st, en, count in item:
+        for l in range(0, count):
+            results[st - 1] = "("
+            results[en - 1] = ")"
+            st += 1
+            en -= 1
+
+    return "".join(results)
 
 if __name__ == "__main__":
     filepath = "data/AUCGCCAU.fasta"
