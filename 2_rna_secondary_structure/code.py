@@ -91,13 +91,14 @@ def create_dotbracket_notation(fastafile: str, min_distance: int=4, min_length: 
                 seq_list.append(line.strip().upper())
 
     seq = "".join(seq_list)
-    results = list("." * len(seq))
     item = enumerate_continuous_pairs(fastafile, 2)
+    results = list("." * len(seq)) 
 
     for st, en, count in item:
-        for l in range(0, count):
-            results[st - 1] = "("
-            results[en - 1] = ")"
+        for l in range(count):
+            if results[st - 1] == "." and results[en - 1] == ".":
+                results[st - 1] = "("
+                results[en - 1] = ")"
             st += 1
             en -= 1
 
