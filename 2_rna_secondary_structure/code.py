@@ -55,8 +55,31 @@ def enumerate_possible_pairs(fastafile: str, min_distance: int=4) -> List[Tuple[
 
 def enumerate_continuous_pairs(fastafile: str, min_distance: int=4, min_length: int=2) -> List[Tuple[int, int, int]]:
     # 課題 2-3
+    seq_list = []
+
+    with open(fastafile, 'r') as f:
+        for line in f:
+            if not line.startswith('>'):
+                seq_list.append(line.strip().upper())
+
+    seq = "".join(seq_list)
+    seq = seq.replace("T", "U")
+
+    results = []
     
-    return []
+    for i in range(0, len(seq)):
+        for l in range(i, len(seq)):
+            count = 0
+            sub_i = i
+            sub_l = l
+            while pair(seq[sub_i], seq[sub_l]) and sub_l - sub_i >= min_distance:
+                sub_i += 1
+                sub_l -= 1
+                count += 1
+            if count >= min_length:
+                results.append((i+1, l+1, count))
+
+    return results
 
 def create_dotbracket_notation(fastafile: str, min_distance: int=4, min_length: int=2) -> str:
     # 課題 2-4
