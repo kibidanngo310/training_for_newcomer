@@ -4,10 +4,32 @@ import numpy as np
 
 def enumerate_pairs(fastafile: str) -> List[Tuple[int, int]]:
     # 課題 2-1
-    return []
+    seq_list = []
+
+    with open(fastafile, 'r') as f:
+        for line in f:
+            if not line.startswith('>'):
+                seq_list.append(line.strip().upper())
+
+    seq = "".join(seq_list)
+    seq = seq.replace("T", "U")
+
+    results = []
+    for i in range(0, len(seq)):
+        for l in range(i, len(seq)):
+            if seq[i] == "A" and seq[l] == "U":
+                results.append((i+1, l+1))
+            if seq[i] == "U" and seq[l] == "A":
+                results.append((i+1, l+1))
+            if seq[i] == "G" and seq[l] == "C":
+                results.append((i+1, l+1))
+            if seq[i] == "C" and seq[l] == "G":
+                results.append((i+1, l+1))
+    return results
 
 def enumerate_possible_pairs(fastafile: str, min_distance: int=4) -> List[Tuple[int, int]]:
     # 課題 2-2
+
     return []
 
 def enumerate_continuous_pairs(fastafile: str, min_distance: int=4, min_length: int=2) -> List[Tuple[int, int, int]]:
