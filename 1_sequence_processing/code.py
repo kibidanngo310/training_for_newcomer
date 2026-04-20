@@ -142,7 +142,7 @@ def translate(fastafile: str) -> List[str]:
             if in_protein:
                 results.append(current)
 
-    return []
+    return results
 
 if __name__ == "__main__":
     filepath = "data/NT_113952.1.fasta"
