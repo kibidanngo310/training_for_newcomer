@@ -12,6 +12,7 @@ def calc_residue_center(pdbfile: str, chain: str, resname: str) -> Union[npt.NDA
 
 def calc_min_distance(pdbfile: str, chain: str, resname: str) -> float:
     # 課題 3-4
+    #0.406 (827 to 827 atoms)
     return 0.0
 
 
